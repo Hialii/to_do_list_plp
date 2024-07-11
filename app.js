@@ -10,22 +10,21 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const dataPath = path.join(__dirname, 'data', 'tasks.json'); //explicar
+const dataPath = path.join(__dirname, 'data', 'tasks.json');
 
 const readTask = () => {
   if (!fs.existsSync(dataPath)) {
     fs.writeFileSync(dataPath, JSON.stringify([]));
   }
 
-  const data = fs.readFileSync(dataPath); //explicar
+  const data = fs.readFileSync(dataPath); 
   return JSON.parse(data);
 };
 
 const writeTasks = (tasks) => {
-  fs.writeFileSync(dataPath, JSON.stringify(tasks, null, 2)); //explicar
+  fs.writeFileSync(dataPath, JSON.stringify(tasks, null, 2)); 
 };
 
-//explicar as rotas
 app.get('/', (req, res) => {
   const tasks = readTask();
   res.render('index', { items: tasks });
